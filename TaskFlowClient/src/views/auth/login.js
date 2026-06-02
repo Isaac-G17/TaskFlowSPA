@@ -8,12 +8,12 @@ export function renderLogin() {
           <div class="flex items-center justify-between">
             <a
               class="text-xl font-black tracking-tight text-blue-900"
-              href="/src/views/home.html"
+              href="/"
               >TaskFlowSPA</a
             >
             <a
               class="rounded-full border border-blue-200 px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-50"
-              href="/src/views/register.html"
+              href="/register"
               >Registrarse</a
             >
           </div>
@@ -87,4 +87,33 @@ export function renderLogin() {
         </div>
       </section>
     </main>`;
+}
+
+
+export function setupLogin() {
+  return console.log("Setup para login");
+  
+  // const form = document.getElementById("register-form");
+  // const nombre = document.getElementById("register-name");
+  // const apellido = document.getElementById("register-lastname");
+  // const email = document - getElementById("register-email");
+  // const password = document.getElementById("register-password");
+  // const role = document.getElementById("register-role");
+
+  // form.addEventListener("submit", async (event) => {
+  //   event.preventDefault();
+
+  //   const newUser = {
+  //     name: nombre.value,
+  //     lastname: apellido.value,
+  //     email: email.value,
+  //     password: password.value,
+  //     roles: [role.value],
+  //   };
+
+  //   const response = await createUser(newUser);
+  //   if (response) {
+  //     alert("Usuario creado exitosamente");
+  //   }
+  // });
 }

@@ -10,17 +10,17 @@ export function renderHome(){
         <nav class="hidden items-center gap-3 md:flex">
         <a
             class="rounded-full px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-700"
-            href="/src/views/home.html"
+            href="/"
             >Home</a
         >
         <a
             class="rounded-full px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-700"
-            href="/src/views/login.html"
+            href="/login"
             >Login</a
         >
         <a
             class="rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-500"
-            href="/src/views/register.html"
+            href="/register"
             >Registrarse</a
         >
         </nav>
@@ -48,12 +48,12 @@ export function renderHome(){
         <div class="mt-8 flex flex-col gap-3 sm:flex-row">
             <a
             class="inline-flex items-center justify-center rounded-2xl bg-blue-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-blue-200 hover:bg-blue-500"
-            href="/src/views/login.html"
+            href="/login"
             >Iniciar sesion</a
             >
             <a
             class="inline-flex items-center justify-center rounded-2xl border border-blue-200 bg-white px-6 py-3 text-sm font-bold text-blue-700 hover:bg-blue-50"
-            href="/src/views/register.html"
+            href="/register"
             >Crear cuenta</a
             >
         </div>
@@ -66,7 +66,7 @@ export function renderHome(){
         <div class="mt-6 grid gap-4 sm:grid-cols-2">
             <a
             class="rounded-3xl bg-sky-50 p-5 hover:bg-sky-100"
-            href="/src/views/dashboard.html"
+            href="/dashboard"
             >
             <p class="text-sm font-semibold text-blue-600">Dashboard</p>
             <p class="mt-2 text-sm text-slate-600">
@@ -75,14 +75,14 @@ export function renderHome(){
             </a>
             <a
             class="rounded-3xl bg-sky-50 p-5 hover:bg-sky-100"
-            href="/src/views/tasks.html"
+            href="/tasks"
             >
             <p class="text-sm font-semibold text-blue-600">Mis tareas</p>
             <p class="mt-2 text-sm text-slate-600">CRUD principal del usuario.</p>
             </a>
             <a
             class="rounded-3xl bg-sky-50 p-5 hover:bg-sky-100"
-            href="/src/views/profile.html"
+            href="/profile"
             >
             <p class="text-sm font-semibold text-blue-600">Mi perfil</p>
             <p class="mt-2 text-sm text-slate-600">
@@ -91,7 +91,7 @@ export function renderHome(){
             </a>
             <a
             class="rounded-3xl bg-sky-50 p-5 hover:bg-sky-100"
-            href="/src/views/admin.html"
+            href="/admin"
             >
             <p class="text-sm font-semibold text-blue-600">Admin</p>
             <p class="mt-2 text-sm text-slate-600">

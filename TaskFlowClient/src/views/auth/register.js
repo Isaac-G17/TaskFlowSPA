@@ -1,8 +1,11 @@
-export function renderRegister(){
+import { buttonLink } from "../../components/atoms/buttonLink";
+import { createUser } from "../../services/user.service";
+
+export function renderRegister() {
   return `
   <main class="grid min-h-screen lg:grid-cols-[0.95fr_1.05fr]">
     <section class="hidden border-r border-blue-100 bg-blue-600 p-10 text-white lg:flex lg:flex-col lg:justify-between">
-      <a class="text-xl font-black tracking-tight" href="/src/views/home.html">TaskFlowSPA</a>
+      <a class="text-xl font-black tracking-tight" href="/">TaskFlowSPA</a>
       <div>
         <p class="text-sm font-semibold uppercase tracking-[0.3em] text-blue-100">Nuevo usuario</p>
         <h1 class="mt-4 text-5xl font-black tracking-tight">Crea tu cuenta y empieza a organizar tu flujo.</h1>
@@ -20,7 +23,7 @@ export function renderRegister(){
             <p class="text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">Registro</p>
             <h2 class="mt-2 text-3xl font-black text-slate-900">Crear cuenta</h2>
           </div>
-          <a class="rounded-full border border-blue-200 px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-50" href="/src/views/login.html">Ya tengo cuenta</a>
+          <a class="rounded-full border border-blue-200 px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-50" href="/login">Ya tengo cuenta</a>
         </div>
 
         <form id="register-form" class="mt-8 grid gap-5">
@@ -54,24 +57,22 @@ export function renderRegister(){
             </div>
           </div>
 
-          <a class="inline-flex items-center justify-center rounded-2xl bg-blue-600 px-5 py-3 text-sm font-bold text-white hover:bg-blue-500" href="/src/views/login.html">
-            Registrarme
-          </a>
+          ${buttonLink("/login", "Registrarme")}
         </form>
       </div>
     </section>
   </main>`;
 }
 
-export function setupRegister(){
-  const form = document.getElementById('register-form');
-  const nombre = document.getElementById('register-name');
-  const apellido = document.getElementById('register-lastname');
-  const email = document-getElementById('register-email');
-  const password = document.getElementById('register-password');
-  const role = document.getElementById('register-role');
+export function setupRegister() {
+  const form = document.getElementById("register-form");
+  const nombre = document.getElementById("register-name");
+  const apellido = document.getElementById("register-lastname");
+  const email = document - getElementById("register-email");
+  const password = document.getElementById("register-password");
+  const role = document.getElementById("register-role");
 
-  form.addEventListener('submit',(event) =>{
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     const newUser = {
@@ -79,8 +80,12 @@ export function setupRegister(){
       lastname: apellido.value,
       email: email.value,
       password: password.value,
-      roles: [role.value]
+      roles: [role.value],
     };
-  })
 
+    const response = await createUser(newUser);
+    if (response) {
+      alert("Usuario creado exitosamente");
+    }
+  });
 }

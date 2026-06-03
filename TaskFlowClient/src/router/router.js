@@ -1,15 +1,30 @@
+import { getSession } from "../services/auth.service";
 import { notFoundView, routes } from "./routes";
 
 export function renderRoute() {
   const app = document.getElementById("app");
+  const currentPath = window.location.pathname;
+  const route = routes[currentPath] ?? { render: notFoundView };
 
-  if (!app) {
-    return;
+  const session = getSession()
+
+  if(route.redirectIfAuthenticated && session){
+    window.history.replaceState({},"","/dashboard")
+    renderRoute()
+    return
   }
 
-  const currentPath = window.location.pathname;
+  if(route.requiresAuth && !session){
+    window.history.replaceState({}, "", "/login")
+    renderRoute()
+    return
+  }
 
-  const route = routes[currentPath] ?? { render: notFoundView };
+  if(route.allowedRoles && !route.allowedRoles.some((role) => session.role?.includes(role))){
+    window.history.replaceState({}, "", "/dashboard")
+    renderRoute()
+    return
+  }
 
   app.innerHTML = route.render();
 

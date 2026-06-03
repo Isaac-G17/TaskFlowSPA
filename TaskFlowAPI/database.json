@@ -1,4 +1,36 @@
 {
-  "user": [],
-  "tasks":[]
+  "users": [
+    {
+      "name": "Isaac",
+      "lastname": "Guzman",
+      "email": "guzman@gmail.com",
+      "password": "guz.123",
+      "roles": [
+        "ADMIN"
+      ],
+      "id": "BSbvBo-vzZ4"
+    },
+    {
+      "name": "stevens",
+      "lastname": "Cachon",
+      "email": "stevens@gmail.com",
+      "password": "ste.123",
+      "roles": [
+        "USER"
+      ],
+      "id": "TWSNqoveNLU"
+    },
+    {
+      "name": "stevens",
+      "lastname": "Cachon 2",
+      "email": "stevens@gmail.com",
+      "password": "stev.123",
+      "roles": [
+        "USER"
+      ],
+      "id": "0uIVQX7baxA"
+    }
+  ],
+  "tasks": [],
+  "$schema": "./node_modules/json-server/schema.json"
 }

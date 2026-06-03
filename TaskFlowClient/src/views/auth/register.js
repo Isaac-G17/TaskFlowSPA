@@ -68,10 +68,10 @@ export function setupRegister() {
   const form = document.getElementById("register-form");
   const nombre = document.getElementById("register-name");
   const apellido = document.getElementById("register-lastname");
-  const email = document - getElementById("register-email");
+  const email = document.getElementById("register-email");
   const password = document.getElementById("register-password");
   const role = document.getElementById("register-role");
-
+  
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
@@ -86,6 +86,7 @@ export function setupRegister() {
     const response = await createUser(newUser);
     if (response) {
       alert("Usuario creado exitosamente");
+      window.location.href = "/login";
     }
   });
 }

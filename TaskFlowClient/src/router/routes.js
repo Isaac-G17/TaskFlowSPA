@@ -12,18 +12,18 @@ import { renderNotFound } from "../views/notFound";
 export const routes = {
     "/": {
         render: renderHome,
-        isPublic: true,
+        requiresAuth: false,
     },
     "/login": {
         render: renderLogin,
         setup: setupLogin,
-        isPublic: true,
+        requiresAuth: false,
         redirectIfAuthenticated: true,
     },
     "/register": {
         render: renderRegister,
         setup: setupRegister,
-        isPublic: true,
+        requiresAuth: false,
         redirectIfAuthenticated: true,
     },
     "/dashboard": {

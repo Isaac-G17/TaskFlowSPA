@@ -2,7 +2,7 @@
   const response = await fetch("http://localhost:3000/users", {
     method: "POST",
     headers: {
-      "Content-Type": "application/JSON",
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(user),
   });
@@ -14,7 +14,7 @@
   return await response.json();
 }
 
-async function getUsers() {
+export async function getUsers() {
   const response = await fetch("http://localhost:3000/users");
   if (!response.ok) {
     throw new Error("Error al obtener los usuarios");
@@ -22,7 +22,7 @@ async function getUsers() {
   return await response.json();
 }
 
-async function getUserById(id) {
+export async function getUserById(id) {
   const response = await fetch(`http://localhost:3000/users/${id}`);
   if (!response.ok) {
     throw new Error("Error al obtener el usuario");
@@ -30,11 +30,11 @@ async function getUserById(id) {
   return await response.json();
 }
 
-async function updateUser(id, user) {
+export async function updateUser(id, user) {
   const response = await fetch(`http://localhost:3000/users/${id}`, {
     method: "PUT",
     headers: {
-      "Content-Type": "application/JSON",
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(user),
   });
@@ -46,7 +46,7 @@ async function updateUser(id, user) {
   return await response.json();
 }
 
-async function deleteUser(id) {
+export async function deleteUser(id) {
   const response = await fetch(`http://localhost:3000/users/${id}`, {
     method: "DELETE",
   });

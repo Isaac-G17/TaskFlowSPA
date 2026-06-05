@@ -1,4 +1,4 @@
-import { clearSession, getSession, isAdmin } from "../services/auth.service";
+import { clearSession, getSession, isAdmin } from "../../services/auth.service";
 
 function navigateTo(path) {
   window.history.pushState({}, "", path);

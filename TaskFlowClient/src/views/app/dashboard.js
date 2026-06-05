@@ -1,4 +1,4 @@
-import { renderAppNav, setupAppNav } from "../../components/appNav";
+import { renderAppNav, setupAppNav } from "../../components/organism/appNav";
 import {
   getDisplayName,
   getPrimaryRole,

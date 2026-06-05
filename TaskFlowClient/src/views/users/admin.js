@@ -1,4 +1,4 @@
-import { renderAppNav, setupAppNav } from "../../components/appNav";
+import { renderAppNav, setupAppNav } from "../../components/organism/appNav";
 import { getSession, isAdmin, saveSession } from "../../services/auth.service";
 import { getUsers, updateUser, deleteUser} from "../../services/user.service";
 import { confirmDeleteUser, showError, success } from "../../utils/alerts";

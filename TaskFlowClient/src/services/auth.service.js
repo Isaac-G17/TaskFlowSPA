@@ -1,5 +1,5 @@
 import { getUserByEmail } from "./user.service";
-import { error } from "../utils/alerts";
+import { showError } from "../utils/alerts";
 import bcrypt from "bcryptjs";
 
 

@@ -1,34 +1,53 @@
+import { getUserByEmail } from "./user.service";
 
 
 
-const llave = "SESSION_ACTUAL"
+const SessionKeys = "SESSION_ACTUAL"
 
-export function createSession(user){
-    localStorage.setItem( llave, JSON.stringify(user));
+export function saveSession(user){
+    const sessionUser = {
+        id: user.id,
+        name: user.name,
+        lastname: user.lastname,
+        email: user.email,
+        roles: user.roles ?? [],
+    }
+
+    localStorage.setItem(SessionKeys, JSON.stringify(sessionUser))
 }
 
-export function getSession(){
-    const sessionJSON = localStorage.getItem(llave)
-    return JSON.parse(sessionJSON)
+
+export function getSession() {
+    const sessionUser = localStorage.getItem(SessionKeys);
+
+    if (!sessionUser) {
+        return null;
+    }
+
+    return JSON.parse(sessionUser);
 }
 
 export function clearSession(){
-    localStorage.removeItem(llave)
+    localStorage.removeItem(SessionKeys)
 }
 
-export async function loginUser({email, password}){
+export async function loginUser({ email, password }) {
     const normalizedEmail = email.trim().toLowerCase()
     const trimmedPassword = password.trim()
 
-    if(!normalizedEmail || !trimmedPassword){
+    if (!normalizedEmail || !trimmedPassword) {
         throw new Error("Debes ingresar correo y contraseña.")
     }
 
-    const user = await findUserByEmail(normalizedEmail)
+    const user = await getUserByEmail(normalizedEmail)
 
-    if(!user){
-        throw new Error("No existe un usuario con este correo.")
+    if (!user) {
+        throw new Error("No existe un usuario con este correo.");
     }
 
-    return user
+    if (user.password !== trimmedPassword) {
+        throw new Error("Contraseña incorrecta.");
+    }
+
+    return user;
 }

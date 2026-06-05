@@ -22,12 +22,15 @@ export async function getUsers() {
   return await response.json();
 }
 
-export async function getUserById(id) {
-  const response = await fetch(`http://localhost:3000/users/${id}`);
+export async function getUserByEmail(email) {
+  const response = await fetch(`http://localhost:3000/users?email=${email}`);
   if (!response.ok) {
     throw new Error("Error al obtener el usuario");
   }
-  return await response.json();
+
+  const users = await response.json();
+
+  return users[0] || null;
 }
 
 export async function updateUser(id, user) {
@@ -58,11 +61,11 @@ export async function deleteUser(id) {
   return true;
 }
 
-export const userService = {
-  createUser,
-  getUsers,
-  getUserById,
-  updateUser,
-  deleteUser,
-};
+// export const userService = {
+//   createUser,
+//   getUsers,
+//   getUserById,
+//   updateUser,
+//   deleteUser,
+// };
 

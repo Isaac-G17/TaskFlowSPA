@@ -12,7 +12,7 @@
     },
     {
       "name": "stevens",
-      "lastname": "Cachon",
+      "lastname": "Herrera",
       "email": "stevens@gmail.com",
       "password": "ste.123",
       "roles": [
@@ -21,14 +21,14 @@
       "id": "TWSNqoveNLU"
     },
     {
-      "name": "stevens",
-      "lastname": "Cachon 2",
-      "email": "stevens@gmail.com",
-      "password": "stev.123",
+      "name": "test",
+      "lastname": "registe",
+      "email": "register@gmail.com",
+      "password": "register.123",
       "roles": [
         "USER"
       ],
-      "id": "0uIVQX7baxA"
+      "id": "1FjSfzNyDlM"
     }
   ],
   "tasks": [],

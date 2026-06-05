@@ -1,5 +1,5 @@
 import { buttonLink } from "../../components/atoms/buttonLink";
-import { createUser } from "../../services/user.service";
+import { createUser, getUserByEmail } from "../../services/user.service";
 
 export function renderRegister() {
   return `
@@ -71,22 +71,36 @@ export function setupRegister() {
   const email = document.getElementById("register-email");
   const password = document.getElementById("register-password");
   const role = document.getElementById("register-role");
-  
+
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
+    
+    try {
+      const normalizedEmail = email.value.trim().toLowerCase();
+      const existingUser = await getUserByEmail(normalizedEmail);
 
-    const newUser = {
-      name: nombre.value,
-      lastname: apellido.value,
-      email: email.value,
-      password: password.value,
-      roles: [role.value],
-    };
+      if (existingUser) {
+        console.log(existingUser)
+        alert("Ya existe una cuenta con ese correo");
+        return;
+      }
 
-    const response = await createUser(newUser);
-    if (response) {
-      alert("Usuario creado exitosamente");
-      window.location.href = "/login";
+      const newUser = {
+        name: nombre.value.trim(),
+        lastname: apellido.value.trim(),
+        email: normalizedEmail,
+        password: password.value,
+        roles: [role.value],
+      };
+
+      const response = await createUser(newUser);
+
+      if (response) {
+        alert("Usuario creado exitosamente");
+      }
+    } catch (error) {
+      console.error(error);
+      alert(error.message || "Ocurrió un error al registrar el usuario");
     }
   });
 }

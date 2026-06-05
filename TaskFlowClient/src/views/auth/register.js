@@ -1,5 +1,7 @@
 import { buttonLink } from "../../components/atoms/buttonLink";
 import { createUser, getUserByEmail } from "../../services/user.service";
+import bcrypt from "bcryptjs";
+import { success, showError} from "../../utils/alerts";
 
 export function renderRegister() {
   return `
@@ -57,7 +59,7 @@ export function renderRegister() {
             </div>
           </div>
 
-          ${buttonLink("/login", "Registrarme")}
+          ${buttonLink("Registrarme")}
         </form>
       </div>
     </section>
@@ -80,27 +82,30 @@ export function setupRegister() {
       const existingUser = await getUserByEmail(normalizedEmail);
 
       if (existingUser) {
-        console.log(existingUser)
-        alert("Ya existe una cuenta con ese correo");
+        showError("Ya existe una cuenta con ese correo");
         return;
       }
+
+      // Generar hash de la contraseña
+      const hashedPassword = await bcrypt.hash(password.value, 12);
 
       const newUser = {
         name: nombre.value.trim(),
         lastname: apellido.value.trim(),
         email: normalizedEmail,
-        password: password.value,
+        password: hashedPassword,
         roles: [role.value],
       };
 
       const response = await createUser(newUser);
 
       if (response) {
-        alert("Usuario creado exitosamente");
+        success("Usuario creado exitosamente");
+        window.location.href = "/login";
       }
     } catch (error) {
       console.error(error);
-      alert(error.message || "Ocurrió un error al registrar el usuario");
+      showError(error.message || "Ocurrió un error al registrar el usuario");
     }
   });
 }

@@ -1,3 +1,8 @@
+import bcrypt from "bcryptjs";
+import { loginUser, saveSession} from "../../services/auth.service.js";
+import {buttonLink} from "../../components/atoms/buttonLink";
+import { success, showError } from "../../utils/alerts.js";
+
 export function renderLogin() {
   return `
     <main class="grid min-h-screen lg:grid-cols-[1fr_0.95fr]">
@@ -32,7 +37,7 @@ export function renderLogin() {
             </p>
           </div>
 
-          <form class="mt-8 grid gap-5">
+          <form id="login-form" class="mt-8 grid gap-5">
             <div>
               <label
                 class="mb-2 block text-sm font-medium text-slate-700"
@@ -59,12 +64,7 @@ export function renderLogin() {
                 class="w-full rounded-2xl border border-blue-100 bg-blue-50 px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:border-blue-400 focus:outline-none"
               />
             </div>
-            <a
-              class="inline-flex items-center justify-center rounded-2xl bg-blue-600 px-5 py-3 text-sm font-bold text-white hover:bg-blue-500"
-              href="/src/views/dashboard.html"
-            >
-              Entrar al dashboard
-            </a>
+            ${buttonLink("Iniciar sesion")}
           </form>
         </div>
       </section>
@@ -91,29 +91,33 @@ export function renderLogin() {
 
 
 export function setupLogin() {
-  return console.log("Setup para login");
-  
-  // const form = document.getElementById("register-form");
-  // const nombre = document.getElementById("register-name");
-  // const apellido = document.getElementById("register-lastname");
-  // const email = document - getElementById("register-email");
-  // const password = document.getElementById("register-password");
-  // const role = document.getElementById("register-role");
+  // return console.log("Setup login");
+  const form = document.getElementById("login-form");
+  const email = document.getElementById("email");
+  const password = document.getElementById("password");
 
-  // form.addEventListener("submit", async (event) => {
-  //   event.preventDefault();
+  if (!form) return;
 
-  //   const newUser = {
-  //     name: nombre.value,
-  //     lastname: apellido.value,
-  //     email: email.value,
-  //     password: password.value,
-  //     roles: [role.value],
-  //   };
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
 
-  //   const response = await createUser(newUser);
-  //   if (response) {
-  //     alert("Usuario creado exitosamente");
-  //   }
-  // });
+    try {
+      const user = await loginUser({
+        email: email.value,
+        password: password.value,
+      });
+
+      saveSession(user);
+
+      success(`Bienvenido ${user.name}`);
+
+      form.reset();
+
+      // Redirigir después del login
+      window.location.hash = "/dashboard";
+    } catch (error) {
+      console.error(error);
+      showError(error.message || "Error al iniciar sesión");
+    }
+  });
 }

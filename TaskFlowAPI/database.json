@@ -1,34 +1,14 @@
 {
   "users": [
     {
-      "name": "Isaac",
-      "lastname": "Guzman",
-      "email": "guzman@gmail.com",
-      "password": "guz.123",
+      "name": "isaac",
+      "lastname": "guzman",
+      "email": "guzmanisaac2005@gmail.com",
+      "password": "$2b$12$P7L3ZQswwkCS3s1NY6vIj.Ga8U1LS6dcFZqEgsAz/edqeoNs7jAsW",
       "roles": [
         "ADMIN"
       ],
-      "id": "BSbvBo-vzZ4"
-    },
-    {
-      "name": "stevens",
-      "lastname": "Herrera",
-      "email": "stevens@gmail.com",
-      "password": "ste.123",
-      "roles": [
-        "USER"
-      ],
-      "id": "TWSNqoveNLU"
-    },
-    {
-      "name": "test",
-      "lastname": "registe",
-      "email": "register@gmail.com",
-      "password": "register.123",
-      "roles": [
-        "USER"
-      ],
-      "id": "1FjSfzNyDlM"
+      "id": "HEEUb8miOpc"
     }
   ],
   "tasks": [],

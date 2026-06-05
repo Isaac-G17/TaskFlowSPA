@@ -1,4 +1,6 @@
 import { getUserByEmail } from "./user.service";
+import { error } from "../utils/alerts";
+import bcrypt from "bcryptjs";
 
 
 
@@ -32,20 +34,28 @@ export function clearSession(){
 }
 
 export async function loginUser({ email, password }) {
-    const normalizedEmail = email.trim().toLowerCase()
-    const trimmedPassword = password.trim()
+    const normalizedEmail = email.trim().toLowerCase();
+    const trimmedPassword = password.trim();
 
     if (!normalizedEmail || !trimmedPassword) {
-        throw new Error("Debes ingresar correo y contraseña.")
+        error("Debes ingresar correo y contraseña.");
+        throw new Error("Debes ingresar correo y contraseña.");
     }
 
-    const user = await getUserByEmail(normalizedEmail)
+    const user = await getUserByEmail(normalizedEmail);
 
     if (!user) {
+        error("No existe un usuario con este correo.");
         throw new Error("No existe un usuario con este correo.");
     }
 
-    if (user.password !== trimmedPassword) {
+    const isValidPassword = await bcrypt.compare(
+        trimmedPassword,
+        user.password
+    );
+
+    if (!isValidPassword) {
+        error("Contraseña incorrecta.");
         throw new Error("Contraseña incorrecta.");
     }
 

@@ -1,7 +1,13 @@
+import { loginUser, saveSession } from "../../services/auth.service";
 import bcrypt from "bcryptjs";
-import { loginUser, saveSession} from "../../services/auth.service.js";
-import {buttonLink} from "../../components/atoms/buttonLink";
 import { success, showError } from "../../utils/alerts.js";
+
+
+
+function navigateTo(path) {
+  window.history.pushState({}, "", path);
+  window.dispatchEvent(new PopStateEvent("popstate"));
+}
 
 export function renderLogin() {
   return `
@@ -64,7 +70,12 @@ export function renderLogin() {
                 class="w-full rounded-2xl border border-blue-100 bg-blue-50 px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:border-blue-400 focus:outline-none"
               />
             </div>
-            ${buttonLink("Iniciar sesion")}
+            <button
+              type="submit"
+              class="inline-flex items-center justify-center rounded-2xl bg-blue-600 px-5 py-3 text-sm font-bold text-white hover:bg-blue-500"
+            >
+              Entrar al dashboard
+            </button>
           </form>
         </div>
       </section>
@@ -89,14 +100,14 @@ export function renderLogin() {
     </main>`;
 }
 
-
 export function setupLogin() {
-  // return console.log("Setup login");
   const form = document.getElementById("login-form");
   const email = document.getElementById("email");
   const password = document.getElementById("password");
 
-  if (!form) return;
+  if (!form || !email || !password) {
+    return;
+  }
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -108,16 +119,9 @@ export function setupLogin() {
       });
 
       saveSession(user);
-
-      success(`Bienvenido ${user.name}`);
-
-      form.reset();
-
-      // Redirigir después del login
-      window.location.hash = "/dashboard";
+      navigateTo("/dashboard");
     } catch (error) {
-      console.error(error);
-      showError(error.message || "Error al iniciar sesión");
+      showError(error.message || "No se pudo iniciar sesion");
     }
   });
 }

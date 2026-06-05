@@ -1,7 +1,11 @@
-import { buttonLink } from "../../components/atoms/buttonLink";
 import { createUser, getUserByEmail } from "../../services/user.service";
 import bcrypt from "bcryptjs";
 import { success, showError} from "../../utils/alerts";
+
+function navigateTo(path) {
+  window.history.pushState({}, "", path);
+  window.dispatchEvent(new PopStateEvent("popstate"));
+}
 
 export function renderRegister() {
   return `
@@ -53,13 +57,15 @@ export function renderRegister() {
             <div>
               <label class="mb-2 block text-sm font-medium text-slate-700" for="register-role">Rol</label>
               <select id="register-role" class="w-full rounded-2xl border border-blue-100 bg-blue-50 px-4 py-3 text-slate-900 focus:border-blue-400 focus:outline-none">
-                <option>USER</option>
-                <option>ADMIN</option>
+                <option value="USER">USER</option>
+                <option value="ADMIN">ADMIN</option>
               </select>
             </div>
           </div>
 
-          ${buttonLink("Registrarme")}
+          <button type="submit" class="inline-flex items-center justify-center rounded-2xl bg-blue-600 px-5 py-3 text-sm font-bold text-white hover:bg-blue-500">
+            Registrarme
+          </button>
         </form>
       </div>
     </section>
@@ -74,15 +80,19 @@ export function setupRegister() {
   const password = document.getElementById("register-password");
   const role = document.getElementById("register-role");
 
+  if (!form || !nombre || !apellido || !email || !password || !role) {
+    return;
+  }
+
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
-    
+
     try {
       const normalizedEmail = email.value.trim().toLowerCase();
       const existingUser = await getUserByEmail(normalizedEmail);
 
       if (existingUser) {
-        showError("Ya existe una cuenta con ese correo");
+        alert("Ya existe una cuenta con ese correo");
         return;
       }
 
@@ -97,15 +107,13 @@ export function setupRegister() {
         roles: [role.value],
       };
 
-      const response = await createUser(newUser);
+      await createUser(newUser);
 
-      if (response) {
-        success("Usuario creado exitosamente");
-        window.location.href = "/login";
-      }
+      success("Usuario registrado exitosamente. Inicia sesion.");
+      navigateTo("/login");
     } catch (error) {
       console.error(error);
-      showError(error.message || "Ocurrió un error al registrar el usuario");
+      showError(error.message || "Ocurrio un error al registrar el usuario");
     }
   });
 }

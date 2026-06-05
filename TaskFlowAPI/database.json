@@ -1,16 +1,51 @@
 {
   "users": [
     {
+      "name": "Stevens",
+      "lastname": "herrera",
+      "email": "stevens@gmail.com",
+      "password": "$2b$10$Iq5/NzdMOc3BQl28D2I.Xulu3WB5yIsC4YGvm.UYPnyPDe7NWIYH6",
+      "roles": [
+        "USER"
+      ],
+      "id": "a4kxw6Yfd8I"
+    },
+    {
       "name": "isaac",
       "lastname": "guzman",
       "email": "guzmanisaac2005@gmail.com",
-      "password": "$2b$12$P7L3ZQswwkCS3s1NY6vIj.Ga8U1LS6dcFZqEgsAz/edqeoNs7jAsW",
+      "password": "$2b$12$a.9emxavBC32jKUvg1QPie4i/HzgTLI0NGKXQycEggSB.pPZ8EVFi",
       "roles": [
         "ADMIN"
       ],
-      "id": "HEEUb8miOpc"
+      "id": "Ph5NhKYBPX0"
     }
   ],
-  "tasks": [],
+  "tasks": [
+    {
+      "title": "Realizar prueba de desempeño de JS",
+      "description": "Realizar de 11 a 4",
+      "status": "Pendiente",
+      "date": "2026-06-05",
+      "userId": "Ph5NhKYBPX0",
+      "id": "iEzqNvRYUXw"
+    },
+    {
+      "title": "Estudiar para sustentar prueba de desempeño de JS",
+      "description": "",
+      "status": "Pendiente",
+      "date": "2026-06-09",
+      "userId": "Ph5NhKYBPX0",
+      "id": "Sm-YjvDq6pc"
+    },
+    {
+      "title": "Realizar prueba de desempeño JS",
+      "description": "",
+      "status": "Pendiente",
+      "date": "2026-06-05",
+      "userId": "a4kxw6Yfd8I",
+      "id": "ZmRCHvnFtTw"
+    }
+  ],
   "$schema": "./node_modules/json-server/schema.json"
 }

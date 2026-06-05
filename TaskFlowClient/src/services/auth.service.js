@@ -33,19 +33,35 @@ export function clearSession(){
     localStorage.removeItem(SessionKeys)
 }
 
+export function isAdmin(session) {
+    return session?.roles?.includes("ADMIN") ?? false;
+}
+
+export function getDisplayName(session) {
+    if (!session) {
+        return "Usuario";
+    }
+
+    return `${session.name} ${session.lastname}`.trim();
+}
+
+export function getPrimaryRole(session) {
+    return isAdmin(session) ? "ADMIN" : "USER";
+}
+
 export async function loginUser({ email, password }) {
     const normalizedEmail = email.trim().toLowerCase();
     const trimmedPassword = password.trim();
 
     if (!normalizedEmail || !trimmedPassword) {
-        error("Debes ingresar correo y contraseña.");
+        showError("Debes ingresar correo y contraseña.");
         throw new Error("Debes ingresar correo y contraseña.");
     }
 
     const user = await getUserByEmail(normalizedEmail);
 
     if (!user) {
-        error("No existe un usuario con este correo.");
+        showError("No existe un usuario con este correo.");
         throw new Error("No existe un usuario con este correo.");
     }
 
@@ -55,7 +71,7 @@ export async function loginUser({ email, password }) {
     );
 
     if (!isValidPassword) {
-        error("Contraseña incorrecta.");
+        showError("Contraseña incorrecta.");
         throw new Error("Contraseña incorrecta.");
     }
 

@@ -41,7 +41,7 @@ export const routes = {
         requiresAuth: true,
         setup: setupTasksFormView,
     },
-    "/tasks/edit": {
+    "/tasks/edit/:id": {
         render: renderTaskForm,
         requiresAuth: true,
         setup: setupTasksFormView,

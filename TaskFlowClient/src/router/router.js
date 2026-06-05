@@ -1,10 +1,22 @@
 import { getSession } from "../services/auth.service";
 import { notFoundView, routes } from "./routes";
 
+function resolveRoute(pathname) {
+  if (routes[pathname]) {
+    return routes[pathname];
+  }
+
+  if (/^\/tasks\/edit\/[^/]+$/.test(pathname)) {
+    return routes["/tasks/edit/:id"];
+  }
+
+  return { render: notFoundView };
+}
+
 export function renderRoute() {
   const app = document.getElementById("app");
   const currentPath = window.location.pathname;
-  const route = routes[currentPath] ?? { render: notFoundView };
+  const route = resolveRoute(currentPath);
 
   const session = getSession()
 
@@ -20,7 +32,7 @@ export function renderRoute() {
     return
   }
 
-  if(route.allowedRoles && !route.allowedRoles.some((role) => session.role?.includes(role))){
+  if(route.allowedRoles && !route.allowedRoles.some((role) => session.roles?.includes(role))){
     window.history.replaceState({}, "", "/dashboard")
     renderRoute()
     return

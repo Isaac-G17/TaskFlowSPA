@@ -1,203 +1,298 @@
-# TaskFlowSPA
+# 🚀 TaskFlowSPA
 
-TaskFlowSPA es una aplicacion web tipo SPA (Single Page Application) construida con JavaScript Vanilla, HTML, CSS y Tailwind CSS. Su objetivo es simular un sistema moderno de gestion de tareas y productividad mientras sirve como base practica para aprender arquitectura frontend sin depender de frameworks como React, Vue o Angular.
+TaskFlowSPA es una aplicación web tipo SPA (Single Page Application) desarrollada con JavaScript Vanilla, HTML, Tailwind CSS y Vite. El proyecto simula un sistema moderno de gestión de tareas y productividad, implementando autenticación, autorización basada en roles, protección de rutas, renderizado dinámico de vistas y persistencia de datos mediante un backend simulado con JSON Server.
 
-La aplicacion usara routing del lado del cliente con History API para navegar entre vistas sin recargar toda la pagina, integrando autenticacion, autorizacion por roles, proteccion de rutas, renderizado dinamico y persistencia de datos con un backend fake basado en `json-server`.
+El objetivo principal del proyecto es demostrar cómo construir una SPA escalable sin depender de frameworks como React, Angular o Vue, aplicando buenas prácticas de arquitectura frontend y separación de responsabilidades.
 
-Para simplificar la autenticacion en esta primera SPA, la sesion activa del usuario se manejara con `localStorage`, mientras que `json-server` se utilizara para los datos persistentes del sistema.
+---
 
-## Objetivo del proyecto
+## ✨ Características principales
 
-Este proyecto esta pensado para practicar fundamentos clave del desarrollo frontend moderno:
+- Autenticación de usuarios.
+- Registro de nuevos usuarios.
+- Inicio y cierre de sesión.
+- Persistencia de sesión mediante LocalStorage.
+- Contraseñas protegidas mediante hash con bcryptjs.
+- Sistema de roles (`ADMIN` y `USER`).
+- Protección de rutas.
+- Navegación SPA utilizando History API.
+- Dashboard con información relevante del usuario.
+- CRUD completo de tareas.
+- Gestión de perfil de usuario.
+- Actualización de contraseña.
+- Eliminación de cuenta propia.
+- Panel administrativo para gestión de usuarios.
+- Cambio de roles desde el panel de administración.
+- Interfaz moderna construida con Tailwind CSS.
+- Arquitectura modular y escalable.
 
-- Routing SPA.
-- Arquitectura frontend modular.
-- Separacion de responsabilidades.
-- Manejo de estado basico.
-- Guards y proteccion de rutas.
-- Reutilizacion de componentes.
-- Escalabilidad en Vanilla JS.
+---
 
-## Tipo de arquitectura
+## 🛠️ Tecnologías utilizadas
 
-Este proyecto usara una arquitectura frontend simple por capas (`layered architecture`) adaptada a una SPA en JavaScript Vanilla.
+### Frontend
 
-La idea es separar la aplicacion por responsabilidades para que sea mas facil de aprender, mantener y escalar poco a poco:
-
-- `main.js` como punto de arranque.
-- `router/` para la navegacion SPA.
-- `views/` para las pantallas principales.
-- `components/` para piezas reutilizables.
-- `services/` para datos, sesion y comunicacion con el backend fake.
-- `utils/` para funciones auxiliares.
-- `styles/` para estilos globales y apoyo visual.
-
-Esta decision busca que el equipo entienda primero como funciona una SPA antes de pasar a arquitecturas mas avanzadas o mas modulares por dominio.
-
-## Stack principal
-
-- JavaScript Vanilla
+- JavaScript (ES Modules)
 - HTML5
-- CSS3
 - Tailwind CSS
 - Vite
-- JSON Server como backend fake
 
-## Funcionalidades previstas
 
-- Inicio de sesion y cierre de sesion.
-- Manejo de sesion del usuario.
-- Rutas publicas y privadas.
-- Sistema de roles y permisos.
-- Navegacion SPA con `History API`.
-- Renderizado dinamico de vistas.
-- Componentes reutilizables.
-- CRUD completo de tareas.
-- Edicion de perfil del usuario autenticado.
-- Eliminacion de la propia cuenta por parte del usuario autenticado.
-- Dashboard principal con estadisticas basicas.
-- Panel administrativo para usuarios `ADMIN`.
-- Consumo de datos desde un backend fake con `json-server`.
+### Persistencia y autenticación
 
-## Roles iniciales
+- JSON Server
+- LocalStorage
+- bcryptjs
 
-### `ADMIN`
+### Herramientas adicionales
 
-- Puede gestionar usuarios.
-- Puede visualizar todas las tareas.
-- Puede modificar roles y permisos.
-- Tiene acceso completo al sistema.
+- SweetAlert2
+- History API
 
-### `USER`
+---
 
-- Puede crear, editar y eliminar sus propias tareas.
-- Puede visualizar solo la informacion relacionada con su cuenta.
-- Puede editar su propio perfil.
-- Puede eliminar su propia cuenta.
+## 🏗️ Arquitectura del proyecto
 
-## Alcance funcional esperado
+El proyecto sigue una arquitectura modular por capas que facilita la mantenibilidad y escalabilidad del código.
 
-La SPA deberia incluir, como minimo, los siguientes modulos o vistas:
+### Capas principales
 
-- `Login`
-- `Dashboard`
-- `Mis tareas`
-- `Mi perfil`
-- `Detalle o formulario de tarea`
-- `Administracion de usuarios` solo para `ADMIN`
-- `Pagina 404`
+- **Views:** pantallas principales de la aplicación.
+- **Components:** elementos reutilizables de interfaz.
+- **Services:** acceso a datos y lógica de negocio.
+- **Router:** navegación SPA.
+- **Utils:** funciones auxiliares.
+- **Styles:** estilos globales.
 
-## Estructura sugerida
+---
 
-La estructura inicial del proyecto sera sencilla y progresiva:
+## 📁 Estructura del proyecto
 
 ```text
-src/
-  main.js
-  router/
-  views/
-  components/
-  services/
-  utils/
-  styles/
+TASKFLOWSPA/
+│
+├── TaskFlowAPI/
+│             ├── database.json
+│             └── package.json
+│
+├── TaskFlowClient/
+│             ├── public/
+│             │     └───favicon.ico
+│             │
+│             ├── src/
+│             │     ├───components/
+│             │     │       ├───atoms/
+│             │     │       │       └───buttonLink.js
+│             │     │       └───organism/
+│             │     │               └───appNav.js
+│             │     │
+│             │     ├───router/
+│             │     │       ├───router.js
+│             │     │       └───routes.js
+│             │     │          
+│             │     ├───services/
+│             │     │       ├───auth.service.js
+│             │     │       ├───task.service.js
+│             │     │       └───user.service.js
+│             │     ├───styles/
+│             │     │       └───global.css      
+│             │     ├───utils/
+│             │     │       └───alerts.js          
+│             │     ├───views/
+│             │     │   ├───app/
+│             │     │   │     └───dashboard.js               
+│             │     │   ├───auth/
+│             │     │   │       ├───login.js
+│             │     │   │       └───register.js
+│             │     │   ├───tasks/
+│             │     │   │       ├───taskForm.js
+│             │     │   │       └───task.js          
+│             │     │   └───users/
+│             │     │          ├───admin.js
+│             │     │         └───profile.js                 
+│             │     │
+│             │     └── main.js
+│             │
+│             ├── index.hmtl
+│             ├── license
+│             ├── package-lock.json
+│             ├── package.json
+│             └── vite.config.ts
+│
+└── README.md
+
+
 ```
 
-### Principios de arquitectura
+---
 
-- Cada modulo debe encargarse de una responsabilidad clara.
-- Las vistas no deben contener toda la logica de negocio.
-- El acceso al backend debe centralizarse en `services`.
-- La logica de permisos debe aislarse en el sistema de routing o en utilidades de autorizacion.
-- Los componentes compartidos deben ser reutilizables y faciles de identificar.
-- Las vistas deben apoyarse en Tailwind CSS para mantener consistencia visual y velocidad de construccion.
+## 🔐 Sistema de autenticación
 
-## Flujo general de navegacion
+TaskFlowSPA implementa autenticación basada en sesión local.
 
-1. El usuario entra a la aplicacion.
-2. Si no tiene sesion activa, ve la vista de `login`.
-3. Tras autenticarse, la sesion se guarda en `localStorage`.
-4. El router redirige segun su estado de sesion y permisos.
-5. Al recargar la app, la sesion se restaura desde `localStorage`.
-6. Las rutas administrativas validan autenticacion y rol `ADMIN`.
-7. Al cerrar sesion, los datos de sesion se eliminan del `localStorage`.
+### Flujo de autenticación
 
-## Reglas de negocio base
+1. El usuario se registra.
+2. La contraseña se transforma mediante hash usando bcryptjs.
+3. El usuario inicia sesión con correo y contraseña.
+4. La sesión se almacena en LocalStorage.
+5. Al cerrar sesión, los datos son eliminados del almacenamiento local.
 
-- Un `USER` solo puede manipular sus propias tareas.
-- Un `USER` solo puede editar su propio perfil.
-- Un `USER` puede eliminar su propia cuenta.
-- Un `ADMIN` puede ver y administrar todas las tareas y usuarios.
-- Las rutas privadas no deben renderizarse si no existe una sesion valida.
-- El estado de autenticacion debe persistirse de forma controlada en `localStorage`.
+### Seguridad implementada
 
-## Scripts disponibles
+- Contraseñas almacenadas mediante hash.
+- Validación de credenciales.
+- Protección de rutas privadas.
+- Control de acceso por roles.
 
-- `npm run dev`: levanta el entorno de desarrollo con Vite.
-- `npm run build`: genera la version de produccion.
-- `npm run preview`: sirve localmente el build generado.
+---
 
-## Inicio rapido
+## 👥 Roles del sistema
 
-1. Instala dependencias:
+### ADMIN
+
+- Visualizar todos los usuarios.
+- Modificar roles de usuarios.
+- Eliminar usuarios.
+- Acceder al panel administrativo.
+- Gestionar todas las tareas del sistema.
+
+### USER
+
+- Crear tareas.
+- Editar sus propias tareas.
+- Eliminar sus propias tareas.
+- Gestionar su perfil.
+- Actualizar contraseña.
+- Eliminar su propia cuenta.
+
+---
+
+## 📋 Módulos implementados
+
+### 🔑 Autenticación
+
+- Login.
+- Registro.
+- Logout.
+
+### 📊 Dashboard
+
+- Información general del usuario.
+- Estadísticas básicas.
+
+### ✅ Gestión de tareas
+
+- Crear tarea.
+- Editar tarea.
+- Eliminar tarea.
+- Listar tareas.
+
+### 👤 Perfil
+
+- Actualizar nombre.
+- Actualizar apellido.
+- Actualizar correo.
+- Actualizar contraseña.
+- Eliminar cuenta.
+
+### 🛡️ Administración
+
+- Listar usuarios.
+- Cambiar roles.
+- Eliminar usuarios.
+
+### 🚫 Página 404
+
+- Manejo de rutas inexistentes.
+
+---
+
+## 🚀 Ejecución del proyecto
+
+TaskFlowSPA está dividido en dos partes:
+
+- **API:** Backend simulado con JSON Server.
+- **Client:** Aplicación SPA desarrollada con Vite.
+
+Ambos servicios deben ejecutarse simultáneamente.
+
+### 1. Instalar dependencias
+
+Instala las dependencias en cada proyecto:
+
+#### API
 
 ```bash
+cd taskFlowAPI
 npm install
 ```
 
-2. Inicia la app en desarrollo:
+#### Cliente
 
 ```bash
+cd taskFlowClient
+npm install
+```
+
+---
+
+### 2. Iniciar el backend (JSON Server)
+
+Abre una terminal y ejecuta:
+
+```bash
+cd taskFlowAPI
+npx json-server database.json
+```
+
+El servidor API estará disponible en:
+
+```text
+http://localhost:3000
+```
+
+---
+
+### 3. Iniciar el frontend (Vite)
+
+Abre una segunda terminal y ejecuta:
+
+```bash
+cd taskFlowClient
 npm run dev
 ```
 
-3. En paralelo, cuando se agregue el backend fake, inicia `json-server` con el archivo de datos definido para el proyecto.
+La aplicación estará disponible en:
 
-## Backend fake
+```text
+http://localhost:5173
+```
 
-La persistencia de datos del sistema estara basada en `json-server`. La idea es simular recursos como:
+---
 
-- `users`
-- `tasks`
+### 4. Acceder a la aplicación
 
-Ejemplo de responsabilidades del backend fake:
+Con ambos servicios ejecutándose, abre el navegador y visita:
 
-- Consultar usuarios.
-- Validar credenciales de manera simulada.
-- Consultar y actualizar perfil del usuario autenticado.
-- Eliminar la cuenta del usuario autenticado.
-- Obtener tareas por usuario.
-- Crear, editar y eliminar tareas.
-- Permitir consultas globales para administracion.
+```text
+http://localhost:5173
+```
 
-## Manejo de sesion
+La SPA consumirá los datos proporcionados por JSON Server desde:
 
-Para mantener el proyecto simple y enfocado en el aprendizaje:
+```text
+http://localhost:3000
+```
 
-- `json-server` se usara para `users` y `tasks`.
-- `localStorage` se usara para guardar la sesion activa.
-- No se manejara una coleccion `sessions` en el backend fake como parte del flujo principal.
+---
 
-Esto permite practicar autenticacion SPA sin agregar complejidad innecesaria en esta primera etapa.
+## ⚠️ Consideraciones
 
-## Criterios tecnicos del proyecto
+Este proyecto utiliza JSON Server como backend simulado con fines educativos. Aunque se implementa hash de contraseñas mediante bcryptjs, la aplicación no está diseñada para entornos de producción y no sustituye un backend real con mecanismos avanzados de autenticación y seguridad.
 
-- No usar frameworks SPA.
-- Mantener una arquitectura simple por capas desde el inicio.
-- Evitar mezclar DOM, reglas de negocio y acceso a datos en un mismo archivo.
-- Priorizar codigo legible, escalable y facil de mantener.
+---
 
-## Estado actual
+## 📄 Licencia
 
-La base del proyecto ya esta montada con Vite. La implementacion funcional de la SPA se ira construyendo de forma progresiva, comenzando idealmente por:
-
-1. Configuracion del router.
-2. Layout base.
-3. Modulo de autenticacion.
-4. Guards de rutas.
-5. Modulo de tareas.
-6. Dashboard.
-7. Panel administrativo.
-
-## Licencia
-
-Este proyecto se distribuye bajo la licencia incluida en [`LICENSE`](./LICENSE).
+Este proyecto se distribuye bajo la licencia especificada en el archivo `LICENSE`.
